@@ -7,3 +7,9 @@ This information is needed
 ## Genome assembly
 We used the two widely used genome assemblers; [Verkko](https://github.com/marbl/verkko) and [HiFiasm](https://github.com/chhylp123/hifiasm) to do the assembly. 
 
+## Gene annotation
+
+## Repeat annotation
+
+## Variant calls
+
