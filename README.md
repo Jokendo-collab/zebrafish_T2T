@@ -15,5 +15,5 @@ To be added
 
 ### Repeat annotation
 
-### Variant calls
+### Variant calling and analysis
 
