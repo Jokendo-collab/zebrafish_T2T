@@ -4,12 +4,16 @@ We have devised two separate strategies for assembling the zebrafish genome “t
 ## DNA extraction and sequencing
 To be added
 
-## Genome assembly
-We used the two widely used genome assemblers; [Verkko](https://github.com/marbl/verkko) and [HiFiasm](https://github.com/chhylp123/hifiasm) to do the assembly. 
+## Tentative analysis plan
+### Genome assembly
+- [x] The two widely used genome assemblers; [Verkko](https://github.com/marbl/verkko) and [HiFiasm](https://github.com/chhylp123/hifiasm) will be used assemble the genome.  
+- [x]
 
-## Gene annotation
+### Gene annotation
 
-## Repeat annotation
+### Methylation pattern analysis
 
-## Variant calls
+### Repeat annotation
+
+### Variant calls
 
