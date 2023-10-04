@@ -6,7 +6,8 @@ To be added
 
 ## Proposed analysis plan
 ### Genome assembly
-- [x] The two widely used genome assembler; [Verkko](https://github.com/marbl/verkko)  will be used assemble the genome.  
+#### To do:
+- [x] Run [Verkko](https://github.com/marbl/verkko) assembler to assemble the genomes **_de nove_**.  
 - [x] Assembly quality assessments
 - [x] Synteny analysis: visualize filled gaps in the GRCz11 reference genome
 
