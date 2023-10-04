@@ -8,6 +8,7 @@ To be added
 ### Genome assembly
 - [x] The two widely used genome assembler; [Verkko](https://github.com/marbl/verkko)  will be used assemble the genome.  
 - [x] Assembly quality assessments
+- [x] Synteny analysis: visualize filled gaps in the GRCz11 reference genome
 
 ### Gene annotation
 
