@@ -19,3 +19,29 @@ To be added
 
 ### Variant calling and analysis
 
+### Centromere analysis and annotation(s)
+- [ ] Train [dna-nn](https://github.com/Jokendo-collab/dna-nn) to train the classification model
+- [ ] Extract aplha satellite regions in a bed file `dna-brnn -Ai models/attcc-alpha.knm -t16 seq.fa > seq.bed`
+- [ ] Extract the centromere sequences from the T2T assembly: `bedtools getfasta -fi zebrafish_genome.fasta -bed potential_centromeres.gff -fo centromeric_sequences.fasta`
+- [ ] Create a sequence logo plot to visualize the different bases:
+```bash
+# Load necessary libraries
+library(ggseqlogo)
+
+# Define paths and filenames
+fasta_file <- "centromeric_sequences.fasta"  # Path to the extracted centromere sequences in FASTA format
+output_plot <- "centromere_sequence_logo.png"  # Output file for the sequence logo plot
+
+# Load the centromere sequences
+sequences <- Biostrings::readDNAStringSet(fasta_file)
+
+# Create a sequence logo plot
+seq_logo <- ggseqlogo(sequences)
+
+# Save the plot to an image file (e.g., PNG)
+ggsave(output_plot, seq_logo)
+
+cat("Centromere sequence logo plot saved to", output_plot, "\n")
+
+```
+
