@@ -64,6 +64,7 @@ meryl output WIK.only.meryl difference [ difference [ difference WIK.k21.meryl T
 ```      
 - [ ] Then you can run `meryl to count` each strain specific k-mer in the contigs and merge them into a single file
 - [ ] Exract HPC sequences from GFA: `awk '/^S/{print ">"$2; printf "%s", $3 | "fold -w 80"; close("fold -w 80"); print ""}' assembly.homopolymer-compressed.gfa > assembly.homopolymer-compressed.fasta`
+- [ ] Or ` verkko_asm]$ cat assembly.homopolymer-compressed.gfa | awk '{if (match($1, "^S")) { print ">"$2; print $3}}' | fold -c > assembly.homopolymer-compressed.fasta`
 ```bash
 meryl-lookup -existence -sequence assembly.homopolymer-compressed.fasta -mers AB.only.meryl
 ```
