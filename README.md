@@ -45,3 +45,8 @@ cat("Centromere sequence logo plot saved to", output_plot, "\n")
 
 ```
 
+## Three strategy assembly
+- [ ] Run the standard verkko assembly using F2 ONT and PacBio data: It will give us the assembly blocks that are phased from HiFi and ONT alone
+- [ ] Build strain specific k-mers, you'd need to merge each set of 3 strains and subtract that merge from the excluded one
+- [ ] Then you can run `meryl to count` each strain specific k-mer in the contigs and merge them into a single file
+
