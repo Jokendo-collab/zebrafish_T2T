@@ -47,7 +47,7 @@ cat("Centromere sequence logo plot saved to", output_plot, "\n")
 
 ## Three strategy assembly
 - [ ] Run the standard verkko assembly using F2 ONT and PacBio data: It will give us the assembly blocks that are phased from HiFi and ONT alone
-- [ ] Build strain specific k-mers, you'd need to merge each set of 3 strains and subtract that merge from the excluded one
+- [ ] Build strain specific k-mers, you'd need to merge each set of 3 strains and subtract that merge from the excluded one as shown below
 ```bash
 # AB only
 meryl output AB.only.meryl difference [ difference [ difference AB.k21.meryl TL.k21.meryl ] TU.k21.meryl ] WIK.k21.meryl
@@ -62,16 +62,19 @@ meryl output TU.only.meryl difference [ difference [ difference TU.k21.meryl WIK
 meryl output WIK.only.meryl difference [ difference [ difference WIK.k21.meryl TU.k21.meryl ] AB.k21.meryl ] TL.k21.meryl
 
 ```      
-- [ ] Then you can run `meryl to count` each strain specific k-mer in the contigs and merge them into a single file
-- [ ] Exract HPC sequences from GFA: `awk '/^S/{print ">"$2; printf "%s", $3 | "fold -w 80"; close("fold -w 80"); print ""}' assembly.homopolymer-compressed.gfa > assembly.homopolymer-compressed.fasta`
+- [ ] Exract homopolymer compressed [HPC] sequences from GFA: `awk '/^S/{print ">"$2; printf "%s", $3 | "fold -w 80"; close("fold -w 80"); print ""}' assembly.homopolymer-compressed.gfa > assembly.homopolymer-compressed.fasta`
+
 - [ ] Or ` verkko_asm]$ cat assembly.homopolymer-compressed.gfa | awk '{if (match($1, "^S")) { print ">"$2; print $3}}' | fold -c > assembly.homopolymer-compressed.fasta`
+- [ ] Then you can run `meryl to count` each strain specific k-mer in the contigs and merge them into a single file
 ```bash
-meryl-lookup -existence -sequence assembly.homopolymer-compressed.fasta -mers AB.only.meryl
+meryl-lookup -existence -sequence assembly.homopolymer-compressed.fasta -mers AB.only.meryl TU.only.meryl  TL.only.meryl  WIK.only.meryl -o f2_contigKemrs.txt
 ```
-- [ ] Add nodes having 90% coverage per marker
+- [ ] Add nodes having 90% coverage per marker (From individual strain)
 ```bash
 cat compressedMeryls/f2_contigKemrs.txt |sort -nk2,2 |awk '{SUM=$4+$6+$8+$10; tag=$4":"$6":"$8":"$10; if (SUM == 0) {NAME="UNKNOWN"; color="#AAAAAA";} else if ($4/SUM > 0.9) {NAME="AB"; color="#d7191c";} else if ($6/SUM > 0.9) {NAME="TU"; color="fdae61"; } else if ($8/SUM>0.9) {NAME="TL"; color="#abdda4"; } else if ($10/SUM>0.9) { NAME="WIK"; color="#2b83ba"; } else { NAME="MIXED"; color="#FFFF00"; } print $1"\t"$2"\t"NAME"\t"color"\t"tag; }' >> compressedMeryls/f2_contigKemrs.bandage.csv
 ```
+
+# eQTL analysis
 - ## Convert VCF to BED
 - `zcat AB_strain/AB_strain.freebayes.vcf.gz | awk '! /\#/' | awk '{if(length($4) > length($5)) print $1"\t"($2-1)"\t"($2+length($4)-1); else print $1"\t"($2-1)"\t"($2+length($5)-1)}' > output.bed`
 
