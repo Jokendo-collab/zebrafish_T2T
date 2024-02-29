@@ -74,7 +74,14 @@ meryl-lookup -existence -sequence assembly.homopolymer-compressed.fasta -mers AB
 cat compressedMeryls/f2_contigKemrs.txt |sort -nk2,2 |awk '{SUM=$4+$6+$8+$10; tag=$4":"$6":"$8":"$10; if (SUM == 0) {NAME="UNKNOWN"; color="#AAAAAA";} else if ($4/SUM > 0.9) {NAME="AB"; color="#d7191c";} else if ($6/SUM > 0.9) {NAME="TU"; color="fdae61"; } else if ($8/SUM>0.9) {NAME="TL"; color="#abdda4"; } else if ($10/SUM>0.9) { NAME="WIK"; color="#2b83ba"; } else { NAME="MIXED"; color="#FFFF00"; } print $1"\t"$2"\t"NAME"\t"color"\t"tag; }' >> compressedMeryls/f2_contigKemrs.bandage.csv
 ```
 
-# eQTL analysis
-- ## Convert VCF to BED
-- `zcat AB_strain/AB_strain.freebayes.vcf.gz | awk '! /\#/' | awk '{if(length($4) > length($5)) print $1"\t"($2-1)"\t"($2+length($4)-1); else print $1"\t"($2-1)"\t"($2+length($5)-1)}' > output.bed`
+# Analysis procedure to identify strain-specific variants in zebrafish 
+- [ ] Call F0 variants using deep variant (Use sarek workflow )
+- [ ] Merge the four strains variants into a multiVCF file using bcftools merge 
+- [ ] Annotate the vcf file using gatk annotate by using Samplelist annotation flag
+- [ ] Extract variants unique to a strain using grep ; Extract individual samples using ; bcftools view -s AB_AB_strain  -O v -o AB_variants.vcf multisample.vcf
+- [ ] Convert strain specific variant to bed: awk '! /\#/‘ TU.vcf | awk '{if(length($4) > length($5)) print $1"\t"($2-1)"\t"($2+length($4)-1); else print $1"\t"($2-1)"\t"($2+length($5)-1)}' > TU_variant.bed
+- [ ] Intersect variants bedfile with transcripts bed file: bedtools intersect -a variants.bed -b gtf_transcripts.bed -wa -wb > intersected_variants.bed
+- [ ] Extract RNA reads overlapping with variant positions:  bedtools intersect -a sorted.bam -b intersected_variants.bed > reads_overlapping_variants.bam
+- [ ] Quantify transcripts using featureCounts: featureCounts -a gencode_annotation.gtf -o counts.txt -R BAM recalibrated.bam
+- [ ] Visualize in IGV
 
