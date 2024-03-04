@@ -80,7 +80,7 @@ cat compressedMeryls/f2_contigKemrs.txt |sort -nk2,2 |awk '{SUM=$4+$6+$8+$10; ta
 - [ ] Annotate the vcf file using gatk annotate by using Samplelist annotation flag
 - [ ] Extract variants unique to a strain using grep ; Extract individual samples using ; `bcftools view -s AB_AB_strain  -O v -o AB_variants.vcf multisample.vcf`
 - [ ] Convert strain specific variant to bed: `awk '! /\#/‘ TU.vcf | awk '{if(length($4) > length($5)) print $1"\t"($2-1)"\t"($2+length($4)-1); else print $1"\t"($2-1)"\t"($2+length($5)-1)}' > TU_variant.bed`
-- [ ] Estract features from GTF to BED file: `gtf_extract --fields=chrom,start,end,gene_id GRC211_annotation_genomic.gtf -o grcz11.bed`
+- [ ] Estract features from GTF to BED file: `cat genomic.gtf | awk 'OFS="\t" {if ($3=="gene") {print $1,$4-1,$5,$10,$16,$7}}' | tr -d '";' > genomic.gtf`
 - [ ] Intersect variants bedfile with transcripts bed file: `bedtools intersect -a variants.bed -b grcz11.bed -wa -wb > intersected_variants.bed`
 - [ ] Extract RNA reads overlapping with variant positions:  `bedtools intersect -a sorted.bam -b intersected_variants.bed > reads_overlapping_variants.bam`
 - [ ] Quantify transcripts using featureCounts: `featureCounts -a gencode_annotation.gtf -o counts.txt -R BAM recalibrated.bam`
