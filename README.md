@@ -50,7 +50,7 @@ I did not use a script to do this but I can tell you how to do it in more detail
 - [ ] using these coordinates, create a BED file of the sequences flanking these gaps (we chose 100kb on either side)
 - [ ] use bedtools getfasta to extract the gap-flanking sequences from the zebrafish reference
 - [ ] map these gap-flanking sequences to your T2T assembly with winnowmap
-- [ ]for a given gap, find the two flanking sequence alignments in the PAF file
+- [ ] for a given gap, find the two flanking sequence alignments in the PAF file
 - [ ] Use these coordinates to define the coordinates of your gap-filling sequence
 
 ## Three strategy assembly
