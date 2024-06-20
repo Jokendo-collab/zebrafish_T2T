@@ -79,7 +79,7 @@ meryl-lookup -existence -sequence assembly.homopolymer-compressed.fasta -mers AB
 ```
 - [ ] Add nodes having 90% coverage per marker (From individual strain)
 ```bash
-cat compressedMeryls/f2_contigKemrs.txt |sort -nk2,2 |awk '{SUM=$4+$6+$8+$10; tag=$4":"$6":"$8":"$10; if (SUM == 0) {NAME="UNKNOWN"; color="#AAAAAA";} else if ($4/SUM > 0.9) {NAME="AB"; color="#d7191c";} else if ($6/SUM > 0.9) {NAME="TU"; color="fdae61"; } else if ($8/SUM>0.9) {NAME="TL"; color="#abdda4"; } else if ($10/SUM>0.9) { NAME="WIK"; color="#2b83ba"; } else { NAME="MIXED"; color="#FFFF00"; } print $1"\t"$2"\t"NAME"\t"color"\t"tag; }' >> compressedMeryls/f2_contigKemrs.bandage.csv
+cat compressedMeryls/f2_contigKemrs.txt | sort -nk2,2 | awk '{SUM=$4+$6+$8+$10; tag=$4":"$6":"$8":"$10; if (SUM == 0) {NAME="UNKNOWN"; color="#AAAAAA";} else if ($4/SUM > 0.9) {NAME="AB"; color="#d7191c";} else if ($6/SUM > 0.9) {NAME="TU"; color="fdae61"; } else if ($8/SUM>0.9) {NAME="TL"; color="#abdda4"; } else if ($10/SUM>0.9) { NAME="WIK"; color="#2b83ba"; } else { NAME="MIXED"; color="#FFFF00"; } print $1"\t"$2"\t"NAME"\t"color"\t"tag; }' >> compressedMeryls/f2_contigKemrs.bandage.csv
 ```
 
 # Analysis procedure to identify strain-specific variants in zebrafish 
