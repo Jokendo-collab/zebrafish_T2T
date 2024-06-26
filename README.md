@@ -52,6 +52,7 @@ I did not use a script to do this but I can tell you how to do it in more detail
 - [ ] map these gap-flanking sequences to your T2T assembly with winnowmap
 - [ ] for a given gap, find the two flanking sequence alignments in the PAF file
 - [ ] Use these coordinates to define the coordinates of your gap-filling sequence
+- [ ] visualization `cut -f1,2 f11_filledgaps.fasta.fai | awk '{sub(/:.*/,"",$1)} 1' | awk -v OFS="\t" '{ print $1, $2}' | sort | uniq -c | awk -v OFS="\t" '{ print $2, $1, $3}' > filled_gaps_f11.txt`
 
 ## Three strategy assembly
 - [ ] Run the standard verkko assembly using F2 ONT and PacBio data: It will give us the assembly blocks that are phased from HiFi and ONT alone
