@@ -95,3 +95,9 @@ cat compressedMeryls/f2_contigKemrs.txt | sort -nk2,2 | awk '{SUM=$4+$6+$8+$10; 
 - [ ] Quantify transcripts using featureCounts: `featureCounts -a gencode_annotation.gtf -o counts.txt -R BAM recalibrated.bam`
 - [ ] Visualize in IGV
 
+## Haplotype blocks analysis
+- [ ] Load plink version 1.9 ; `module load plink/1.9`
+- [ ] Generate (fam, bed, and ped file) : `plink --vcf merged_top_contigs.vcf.gz  --allow-extra-chr --out myplink`
+- [ ] Identify haploblocks: `plink --bfile myplink --blocks no-pheno-req --out haplotype_blocks  --allow-extra-chr`
+- [ ] Generate LD matrix: `plink --r2 --bfile myplink --ld-window-r2 0.8 --out snp_ld --allow-extra-chr`
+      
