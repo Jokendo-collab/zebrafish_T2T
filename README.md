@@ -97,10 +97,10 @@ cat compressedMeryls/f2_contigKemrs.txt | sort -nk2,2 | awk '{SUM=$4+$6+$8+$10; 
 
 ## Haplotype blocks analysis
 - [ ] Load plink version 1.9 ; `module load plink/1.9`
-- [ ] Generate (fam, bed, and ped file) : `plink --vcf merged_top_contigs.vcf.gz  --allow-extra-chr --out myplink`
-- [ ] Identify haploblocks: `plink --bfile myplink --blocks no-pheno-req --out haplotype_blocks  --allow-extra-chr`
+- [ ] Generate (fam, bed, and ped file) : `plink --vcf merged_top_contigs.vcf.gz  --allow-extra-chr --out myplink` | `plink2 --vcf g3.vcf.gz --make-bed --out plink_g3_output --set-missing-var-ids @:# --allow-no-sex`
+- [ ] Identify haploblocks: `plink --bfile myplink --blocks no-pheno-req --out haplotype_blocks  --allow-extra-chr` | `plink --bfile plink_g3_output --blocks no-pheno-req --out block_g3_output --blocks-inform-frac 0.95 --allow-extra-chr`
 - [ ] Generate LD matrix: `plink --r2 --bfile myplink --ld-window-r2 0.8 --out snp_ld --allow-extra-chr`
-- [ ] Modify variants ID: `plink2 --bfile input --set-all-var-ids @:\# --make-bed --out output`
+- [ ] Modify variants ID: `plink2 --bfile input --set-all-var-ids @:\# --make-bed --out output` 
 
 ## Filtering node lengths
 `cat compressed.mashmap.out | sed s/id:f://g |awk '{if ($6 ==4 && $(NF-1) > 0.97 && $4-$3 > 50000) print $1}'|sort |uniq -c|awk '{if ($1 > 1) print $NF}'`
