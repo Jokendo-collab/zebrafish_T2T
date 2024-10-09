@@ -102,6 +102,7 @@ cat compressedMeryls/f2_contigKemrs.txt | sort -nk2,2 | awk '{SUM=$4+$6+$8+$10; 
 - [ ] Generate LD matrix: `plink --r2 --bfile myplink --ld-window-r2 0.8 --out snp_ld --allow-extra-chr`
 - [ ] Modify variants ID: `plink2 --bfile input --set-all-var-ids @:\# --make-bed --out output`
 - [ ] `Rscript eQTLHap/eQTLHap.R --vcf -f snp2.vcf -g hapeqtl.txt -b block_g3_output.blocks.det -o test -w 1000 -a H --minIndividuals 2 --customBlocks` : block analysis
+- [ ] `Rscript eQTLHap/eQTLHap.R --vcf -f snp11.vcf -g hpgene.txt -b block_g3_output.blocks.det -o TL -w 1000000 -a SGH --minIndividuals 6 --chrm 4 `
 
 ## Filtering node lengths
 `cat compressed.mashmap.out | sed s/id:f://g |awk '{if ($6 ==4 && $(NF-1) > 0.97 && $4-$3 > 50000) print $1}'|sort |uniq -c|awk '{if ($1 > 1) print $NF}'`
